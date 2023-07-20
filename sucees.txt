@@ -1,0 +1,58 @@
+<!----------------------------------------DATABASE CONNECT------------------------------------------->
+<?php
+
+$con=new mysqli('localhost','root','','datadb');
+
+if($con->connect_errno)
+{
+   echo $con->connect_error;
+   die();
+
+}
+//else{
+  //  echo"Database connected";
+//}
+?>
+<!------------------------------------------FRONT END-------------------------------------------------->
+<html>
+<head>
+    <title>Insert Data</title>
+</head>
+<body>
+ <form action="insert.php" method="post">
+        <table>
+            <tr><td>Name</td><td><input type="text" name="name"></td></tr>
+            <tr><td>Age</td><td><input type="text" name="age"></td></tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" name="submit" value="save datas">
+                </td>
+            </tr>
+        </table>
+</form>
+
+<?php
+if (isset($_POST['submit']))
+{
+$a=$_POST['name'];
+$b=$_POST['age'];
+
+
+   $sql="INSERT INTO users (uname,uage) VALUES ('$a','$b')";
+ 
+    if($con->query($sql))
+    {
+   echo"data stored";
+    }
+else
+{  
+    echo"Insert data Fail";
+}}
+else
+{
+    echo"plese Enter All Data";
+
+}
+?>
+</body>
+    </html>
